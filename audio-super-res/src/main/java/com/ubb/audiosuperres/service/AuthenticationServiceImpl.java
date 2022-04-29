@@ -31,6 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
         if (!this.doesTheUsernameExist(userDto)) {
             repository.save(user);
+            userDto.setId(user.getId());
             return userDto;
         }
         return new UserDto(null, null, null);

@@ -16,6 +16,6 @@ import java.io.Serializable;
 @Table(name="Users")
 public class User extends BaseEntity implements Serializable {
     private String username;
-    private String email;
     private String password;
+    private String email;
 }
