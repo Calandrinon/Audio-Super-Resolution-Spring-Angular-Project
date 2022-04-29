@@ -27,7 +27,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody UserDto userDto) {
         UserDto returnedUserDto = authenticationService.createAccount(userDto);
-        if (!returnedUserDto.getUsername().isEmpty())
+        if (returnedUserDto.getUsername() != null)
             return new ResponseEntity<>(returnedUserDto, HttpStatus.OK);
         return new ResponseEntity<>(new UserDto(null, null, null), HttpStatus.UNAUTHORIZED);
     }
