@@ -25,4 +25,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return false;
         }
     }
+
+    @Override
+    public UserDto createAccount(UserDto userDto) {
+        User user = new User(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
+        if (!this.doesTheUsernameExist(userDto)) {
+            repository.save(user);
+            return userDto;
+        }
+        return new UserDto(null, null, null);
+    }
+
+    @Override
+    public boolean doesTheUsernameExist(UserDto userDto) {
+        return repository.findByUsername(userDto.getUsername()).isPresent();
+    }
 }

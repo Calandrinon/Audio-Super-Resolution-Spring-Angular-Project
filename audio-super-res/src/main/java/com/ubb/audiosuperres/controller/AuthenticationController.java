@@ -21,6 +21,14 @@ public class AuthenticationController {
     public ResponseEntity<UserDto> login(@RequestBody UserDto userDto) {
         if (authenticationService.checkUserCredentials(userDto))
             return new ResponseEntity<>(userDto, HttpStatus.OK);
-        return new ResponseEntity<>(new UserDto("failed", "failed", "failed@failed.com"), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(new UserDto(null, null, null), HttpStatus.UNAUTHORIZED);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> register(@RequestBody UserDto userDto) {
+        UserDto returnedUserDto = authenticationService.createAccount(userDto);
+        if (!returnedUserDto.getUsername().isEmpty())
+            return new ResponseEntity<>(returnedUserDto, HttpStatus.OK);
+        return new ResponseEntity<>(new UserDto(null, null, null), HttpStatus.UNAUTHORIZED);
     }
 }
