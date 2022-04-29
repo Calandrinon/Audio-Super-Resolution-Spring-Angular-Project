@@ -2,13 +2,13 @@ package com.ubb.audiosuperres.controller;
 
 import com.ubb.audiosuperres.model.UserDto;
 import com.ubb.audiosuperres.service.AuthenticationService;
+import io.vavr.control.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicReference;
 
 @CrossOrigin
 @RequestMapping("/auth")
@@ -19,16 +19,19 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody UserDto userDto) {
-        if (authenticationService.checkUserCredentials(userDto))
-            return new ResponseEntity<>(userDto, HttpStatus.OK);
-        return new ResponseEntity<>(new UserDto(null, null, null), HttpStatus.UNAUTHORIZED);
+        AtomicReference<Integer> userId = new AtomicReference<>();
+        authenticationService.checkUserCredentials(userDto).ifPresentOrElse(
+                userId::set,
+                () -> userId.set(-1));
+        userDto.setId(userId.get());
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody UserDto userDto) {
-        UserDto returnedUserDto = authenticationService.createAccount(userDto);
-        if (returnedUserDto.getUsername() != null)
-            return new ResponseEntity<>(returnedUserDto, HttpStatus.OK);
-        return new ResponseEntity<>(new UserDto(null, null, null), HttpStatus.UNAUTHORIZED);
+        return Option.of(authenticationService.createAccount(userDto))
+                .filter(returnedUserDto -> !returnedUserDto.getUsername().isEmpty())
+                .map(returnedUserDto -> new ResponseEntity<>(returnedUserDto, HttpStatus.OK))
+                .getOrElse(new ResponseEntity<>(new UserDto("", "", ""), HttpStatus.UNAUTHORIZED));
     }
 }
