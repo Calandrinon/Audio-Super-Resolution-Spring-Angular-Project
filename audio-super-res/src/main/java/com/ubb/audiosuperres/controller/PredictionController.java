@@ -8,13 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.swing.text.html.Option;
 import java.io.*;
 import java.util.Optional;
-import java.util.zip.ZipOutputStream;
 
 @RestController
 @CrossOrigin
@@ -39,6 +35,7 @@ public class PredictionController {
             System.out.println("An error occured while retrieving the prediction:");
             exception.printStackTrace();
         }
-        return new ResponseEntity<Object>(null, HttpStatus.METHOD_NOT_ALLOWED);
+
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 }
