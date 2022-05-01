@@ -8,17 +8,19 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ComponentsModule} from "../../components/components.module";
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-    ClipboardModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        HttpClientModule,
+        NgbModule,
+        ClipboardModule,
+        ComponentsModule
+    ],
   declarations: [
     DashboardComponent,
   ]

@@ -19,7 +19,7 @@ public class PredictionController {
     @Autowired
     private PredictionService predictionService;
 
-    @PostMapping(value = "/prediction")
+    @GetMapping(value = "/prediction")
     public ResponseEntity<Object> returnPredictionZipFile() {
         try {
             Optional<File> fileOptional = predictionService.retrievePrediction();
