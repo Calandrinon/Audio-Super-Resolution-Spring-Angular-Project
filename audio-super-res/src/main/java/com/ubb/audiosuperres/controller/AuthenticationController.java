@@ -3,6 +3,7 @@ package com.ubb.audiosuperres.controller;
 import com.ubb.audiosuperres.model.UserDto;
 import com.ubb.audiosuperres.service.AuthenticationService;
 import io.vavr.control.Option;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,12 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody UserDto userDto) {
-        AtomicReference<Integer> userId = new AtomicReference<>();
+        AtomicReference<ImmutablePair<Integer, String>> userPair = new AtomicReference<>();
         authenticationService.checkUserCredentials(userDto).ifPresentOrElse(
-                userId::set,
-                () -> userId.set(-1));
-        userDto.setId(userId.get());
+                userPair::set,
+                () -> userPair.set(new ImmutablePair<>(-1, "")));
+        userDto.setId(userPair.get().left);
+        userDto.setUsername(userPair.get().right);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 

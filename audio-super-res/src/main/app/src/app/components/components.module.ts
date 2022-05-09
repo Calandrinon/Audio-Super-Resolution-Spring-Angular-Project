@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PredictionComponent } from './prediction/prediction.component';
+import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PredictionComponent } from './prediction/prediction.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    PredictionComponent
+    PredictionComponent,
+    LoadingSpinnerComponent,
   ],
     exports: [
         FooterComponent,
