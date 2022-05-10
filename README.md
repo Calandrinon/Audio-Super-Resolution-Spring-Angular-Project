@@ -1,7 +1,22 @@
 # Audio-Super-Resolution-Spring-Angular-Project
 A simple Spring/Angular project presenting the audio super-resolution B.S. thesis
 
-## Basic UML diagram
+## Current state of the UI
+
+### Dashboard
+
+![Dashboard](audio-super-res/dashboard.png)
+
+### Login page
+
+![Login](audio-super-res/login-page.png)
+
+### Register page
+
+![Register](audio-super-res/register-page.png)
+
+
+## Basic UML diagrams of the classes currently created
 
 ![Authentication UML](audio-super-res/authenticationuml.png)
 
