@@ -48,14 +48,27 @@ export class PredictionComponent implements OnInit {
                         if (filename.includes(".png")) {
                             file = new Blob([fileData], { type: "image/png" });
                             let spectrogram_image_element = document.createElement("img");
-                            let base64_image = this.blobToBase64(file).then(image => {
+                            this.blobToBase64(file).then(image => {
                                 spectrogram_image_element.src = <string>image;
-                                let outputs_container = document.getElementById("outputs-container");
+                                spectrogram_image_element.style.width = "100%";
+                                spectrogram_image_element.style.height = "auto";
+                                let outputs_container = document.getElementById("spectrogram-container");
                                 outputs_container.append(spectrogram_image_element);
                             });
                         } else {
                             file = new Blob([fileData], { type: "audio/wav" });
+                            let wav_file_element = document.createElement("audio");
+                            wav_file_element.controls = true;
                             files.push(file);
+
+                            this.blobToBase64(file).then(audio => {
+                                let source_element = document.createElement("source");
+                                source_element.src = <string>audio;
+                                source_element.type = "audio/wav";
+                                wav_file_element.append(source_element)
+                                let outputs_container = document.getElementById("audio-tracks-container");
+                                outputs_container.append(wav_file_element);
+                            });
                         }
                     });
                 });
