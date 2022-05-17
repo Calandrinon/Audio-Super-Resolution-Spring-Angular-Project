@@ -10,6 +10,8 @@ import * as jsZipUtils from "jszip-utils";
   styleUrls: ['./prediction.component.scss']
 })
 export class PredictionComponent implements OnInit {
+    displayStyle = "none";
+
 
   constructor(private predictionArchiveDownloadService: PredictionArchiveDownloadService) { }
 
@@ -59,6 +61,8 @@ export class PredictionComponent implements OnInit {
                             file = new Blob([fileData], { type: "audio/wav" });
                             let wav_file_element = document.createElement("audio");
                             wav_file_element.controls = true;
+                            wav_file_element.classList.add("audio-track")
+                            wav_file_element.classList.add("mx-auto")
                             files.push(file);
 
                             this.blobToBase64(file).then(audio => {
@@ -73,7 +77,36 @@ export class PredictionComponent implements OnInit {
                     });
                 });
 
+                let elementsToHide = Array.from(document.getElementsByClassName("myLoader") as HTMLCollectionOf<HTMLElement>);
+
+                for(let i = 0; i < elementsToHide.length; i++){
+                    // elementsToHide[i].style.visibility = "hidden";
+                    elementsToHide[i].style.display = "none";
+                }
             });
         });
   }
+
+    openPopup() {
+        this.displayStyle = "block";
+
+        let elementsToHide = Array.from(document.getElementsByClassName("myLoader") as HTMLCollectionOf<HTMLElement>);
+
+        for(let i = 0; i < elementsToHide.length; i++){
+            elementsToHide[i].style.display = "block";
+        }
+
+        this.downloadPredictionZipArchive();
+    }
+
+    closePopup() {
+        const spectrogram_container_element = document.getElementById("spectrogram-container");
+        spectrogram_container_element.innerHTML = "";
+
+        const audio_tracks_container_element = document.getElementById("audio-tracks-container");
+        audio_tracks_container_element.innerHTML = "";
+
+        this.displayStyle = "none";
+    }
+
 }
