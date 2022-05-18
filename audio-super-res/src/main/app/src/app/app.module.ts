@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import {PredictionArchiveDownloadService} from "./components/prediction/prediction-archive-download.service";
 
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -28,7 +27,7 @@ import {PredictionArchiveDownloadService} from "./components/prediction/predicti
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
   ],
   providers: [PredictionArchiveDownloadService],
   bootstrap: [AppComponent]

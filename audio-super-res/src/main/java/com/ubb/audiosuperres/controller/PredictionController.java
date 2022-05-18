@@ -38,4 +38,10 @@ public class PredictionController {
 
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello() {
+        return new ResponseEntity<>("Hello World", HttpStatus.OK);
+    }
+
 }
