@@ -1,16 +1,9 @@
 package com.ubb.audiosuperres.controller;
 
-import java.util.Objects;
 import com.ubb.audiosuperres.model.UserDto;
-import com.ubb.audiosuperres.service.AuthenticationService;
-import io.vavr.control.Option;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -28,15 +21,10 @@ import com.ubb.audiosuperres.config.JwtTokenUtil;
 import com.ubb.audiosuperres.model.JwtRequest;
 import com.ubb.audiosuperres.model.JwtResponse;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 @CrossOrigin
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
-    @Autowired
-    private AuthenticationService authenticationService;
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -46,7 +34,7 @@ public class AuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -69,23 +57,9 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody UserDto userDto) {
-        AtomicReference<ImmutablePair<Integer, String>> userPair = new AtomicReference<>();
-        authenticationService.checkUserCredentials(userDto).ifPresentOrElse(
-                userPair::set,
-                () -> userPair.set(new ImmutablePair<>(-1, "")));
-        userDto.setId(userPair.get().left);
-        userDto.setUsername(userPair.get().right);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
-    }
-
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody UserDto userDto) {
-        return Option.of(authenticationService.createAccount(userDto))
-                .filter(returnedUserDto -> !returnedUserDto.getUsername().isEmpty())
-                .map(returnedUserDto -> new ResponseEntity<>(returnedUserDto, HttpStatus.OK))
-                .getOrElse(new ResponseEntity<>(new UserDto("", "", ""), HttpStatus.UNAUTHORIZED));
+    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok(userDetailsService.save(userDto));
     }
 
 }
