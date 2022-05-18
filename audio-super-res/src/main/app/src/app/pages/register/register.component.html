@@ -52,6 +52,7 @@
               </div>
             </div>
             <div *ngIf="registrationFailed">Account already exists.</div>
+            <div *ngIf="!registrationFailed && recentRegistration"> Account successfully created. </div>
             <div class="text-center">
               <button type="button" class="btn btn-primary mt-4" (click)="register(username.value, email.value, password.value)">Create account</button>
             </div>
@@ -60,4 +61,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

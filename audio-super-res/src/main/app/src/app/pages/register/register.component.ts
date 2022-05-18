@@ -10,6 +10,7 @@ import {RegisterService} from "../authentication/service/register.service";
 })
 export class RegisterComponent implements OnInit {
     registrationFailed: boolean = false;
+    recentRegistration: boolean = false;
 
     constructor(private registerService: RegisterService,
             private router: Router) { }
@@ -26,9 +27,9 @@ export class RegisterComponent implements OnInit {
           console.log("Response:");
           console.log(response);
           if (response.body['id'] != null) {
-            localStorage.setItem('token', response.body['token']);
             console.log("Response is positive.");
             this.registrationFailed = false;
+            this.recentRegistration = true;
           } else {
               console.log("Response is negative.");
               this.registrationFailed = true;
