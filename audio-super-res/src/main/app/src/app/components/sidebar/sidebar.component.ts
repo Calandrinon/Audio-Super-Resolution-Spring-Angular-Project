@@ -31,4 +31,13 @@ export class SidebarComponent implements OnInit {
       this.isCollapsed = true;
    });
   }
+
+  checkIfTokenIsInLocalStorage(): boolean {
+      let token = localStorage.getItem("token");
+      return token !== null;
+  }
+
+  deleteToken(): void {
+      localStorage.removeItem("token");
+  }
 }

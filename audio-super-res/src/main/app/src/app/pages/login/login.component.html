@@ -27,9 +27,9 @@
             <div class="form-group mb-3">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" #email>
+                <input class="form-control" placeholder="Username" type="text" #username>
               </div>
             </div>
             <div class="form-group">
@@ -42,7 +42,7 @@
               <div *ngIf="failedAuthentication">Incorrect username or password.</div>
             </div>
             <div class="text-center">
-              <button type="button" class="btn btn-primary my-4" (click)="login(email.value, password.value)">Sign in</button>
+              <button type="button" class="btn btn-primary my-4" (click)="login(username.value, password.value)">Sign in</button>
             </div>
           </form>
         </div>

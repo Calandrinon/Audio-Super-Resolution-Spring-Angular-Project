@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(email: string, password: string): void {
     console.log("Here is where the login should start...");
-    localStorage.setItem('current-user', JSON.stringify(-1));
     this.loginService.checkCredentials(email, password).subscribe(
         (response) => {
             console.log("In login component")

@@ -11,7 +11,7 @@
     </a>
 
     <div class="collapse navbar-collapse"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
+      <ul *ngIf="!checkIfTokenIsInLocalStorage(); else elseBlock" class="navbar-nav">
           <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
               <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
                   <i class="ni {{menuItem.icon}}"></i>
@@ -19,7 +19,13 @@
               </a>
           </li>
       </ul>
-      <hr class="my-3">
+        <ng-template #elseBlock>
+            <button type="button" class="btn btn-success"
+                    (click)="deleteToken()">
+                Logout
+            </button>
+        </ng-template>
+        <hr class="my-3">
     </div>
   </div>
 </nav>

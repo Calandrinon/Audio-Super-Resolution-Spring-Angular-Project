@@ -7,14 +7,14 @@ import {Credentials} from "../model/credentials";
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-  endpoint = "http://localhost:8080/auth/login";
+export class RegisterService {
+  endpoint = "http://localhost:8080/auth/register";
 
   constructor(private httpClient: HttpClient) { }
 
-  checkCredentials(username: string, password: string): Observable<HttpResponse<Object>> {
-    let body = new Credentials(username, "", password);
-    console.log("From auth.service");
+  saveNewAccount(username: string, email: string, password: string): Observable<HttpResponse<Object>> {
+    let body = new Credentials(username, email, password);
+    console.log("From register.service");
     return this.httpClient.post(this.endpoint, body, {observe: 'response'});
   }
 }
