@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserDto} from "../model/userDto";
 import {Credentials} from "../model/credentials";
@@ -12,9 +12,9 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  checkCredentials(email: string, password: string): Observable<UserDto>{
-    let body = new Credentials(email, password);
+  checkCredentials(username: string, password: string): Observable<HttpResponse<Object>> {
+    let body = new Credentials(username, password);
     console.log("From auth.service");
-    return this.httpClient.post<UserDto>(this.endpoint, body);
+    return this.httpClient.post(this.endpoint, body, {observe: 'response'});
   }
 }

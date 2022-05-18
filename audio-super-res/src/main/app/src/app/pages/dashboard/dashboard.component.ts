@@ -9,14 +9,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  checkLocalStorageId(): boolean {
-    let currentUser = localStorage.getItem("current-user");
-    if (currentUser !== null) {
-      let contents = Number(JSON.parse(currentUser));
-      console.log(contents);
-      return (contents !== -1);
-    }
-    return false;
+  checkLocalStorageToken(): boolean {
+    let token = localStorage.getItem("token");
+    return token !== null;
   }
 
 }

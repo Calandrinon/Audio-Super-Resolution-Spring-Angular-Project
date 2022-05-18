@@ -10,6 +10,7 @@ import {UserDto} from "../authentication/model/userDto";
 })
 export class LoginComponent implements OnInit, OnDestroy {
   authenticated: boolean;
+  failedAuthentication: boolean = false;
 
   constructor(private loginService: LoginService,
               private router: Router) { }
@@ -22,19 +23,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     console.log("Here is where the login should start...");
     localStorage.setItem('current-user', JSON.stringify(-1));
     this.loginService.checkCredentials(email, password).subscribe(
-        (response: UserDto) => {
-          if(response.id !== -1){
-            console.log("Response is positive.")
-            this.authenticated = true
-            console.log(JSON.stringify(response))
-            localStorage.setItem('current-user', JSON.stringify(response.id))
-            document.defaultView.location.reload()
-            this.router.navigate(['/dashboard']).then(p => {window.location.reload(); return true});
-          }
-          else {
-            console.log("Response is negative.")
-            this.authenticated = false
-          }
+        (response) => {
+            console.log("In login component")
+            console.log("Token:");
+            console.log(response);
+            if (response.body != null) {
+                localStorage.setItem('token', response.body['token']);
+                console.log("Response is positive.");
+                console.log(response.body['token']);
+                this.authenticated = true;
+                document.defaultView.location.reload();
+                this.router.navigate(['/dashboard']).then(p => {window.location.reload(); return true});
+            } else {
+                console.log("aaaaaaaaaaaaaa")
+                this.authenticated = false;
+                this.failedAuthentication = true;
+            }
         }
     )
   }

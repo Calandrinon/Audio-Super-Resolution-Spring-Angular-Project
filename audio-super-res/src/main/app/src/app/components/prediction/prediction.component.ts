@@ -28,7 +28,7 @@ export class PredictionComponent implements OnInit {
 
 
     public downloadPredictionZipArchive(): void {
-    this.predictionArchiveDownloadService.downloadPrediction()
+    this.predictionArchiveDownloadService.downloadPrediction(localStorage.getItem('token'))
         .subscribe(response => {
             console.log("Response body:")
             console.log(response.body)
