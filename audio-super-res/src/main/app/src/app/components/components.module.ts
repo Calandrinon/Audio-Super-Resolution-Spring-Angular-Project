@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PredictionComponent } from './prediction/prediction.component';
 import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
+import { RecorderComponent } from './recorder/recorder.component';
 
 @NgModule({
   imports: [
@@ -20,12 +21,14 @@ import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.compone
     SidebarComponent,
     PredictionComponent,
     LoadingSpinnerComponent,
+    RecorderComponent,
   ],
     exports: [
         FooterComponent,
         NavbarComponent,
         SidebarComponent,
-        PredictionComponent
+        PredictionComponent,
+        RecorderComponent
     ]
 })
 export class ComponentsModule { }
