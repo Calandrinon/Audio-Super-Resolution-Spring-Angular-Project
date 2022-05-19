@@ -20,8 +20,9 @@
           </li>
       </ul>
         <ng-template #elseBlock>
+            <h4>Welcome, {{getUsername()}}!</h4>
             <button type="button" class="btn btn-success"
-                    (click)="deleteToken()">
+                    (click)="logout()">
                 Logout
             </button>
         </ng-template>

@@ -37,7 +37,12 @@ export class SidebarComponent implements OnInit {
       return token !== null;
   }
 
-  deleteToken(): void {
+  logout(): void {
       localStorage.removeItem("token");
+      localStorage.removeItem("username");
+  }
+
+  getUsername(): string {
+      return localStorage.getItem("username");
   }
 }
