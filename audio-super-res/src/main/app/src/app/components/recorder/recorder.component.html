@@ -1,13 +1,42 @@
 <div>
-    <button (click)="initiateRecording()" class="btn btn-success btn-rounded" *ngIf="!recording" style="cursor: pointer;">
+    <button (click)="initiateRecording()" type="button" class="col btn btn-success btn-rounded upload-button" *ngIf="!recording" style="cursor: pointer;">
         Start Recording
     </button>
 
-    <button (click)="stopRecording()" class="btn btn-danger" *ngIf="recording" style="cursor: pointer;background-color: red; color: white;font-size: 40px;">
+    <button (click)="stopRecording()" type="button" class="col btn btn-success btn-rounded upload-button" *ngIf="recording" style="cursor: pointer;">
         Stop Recording
     </button>
 
-    <audio controls="" *ngIf="url">
-        <source [src]="sanitize(url)" type="audio/wav">
-    </audio>
+    <div
+            class="modal"
+            tabindex="-1"
+            role="dialog"
+            data-backdrop="static"
+            [ngStyle]="{'display': displayStyle}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Generated outputs for the custom recording</h2>
+                </div>
+                <div class="modal-body">
+                    <h3>Spectrograms</h3>
+                    <div class="myLoader">
+                        <app-loading-spinner></app-loading-spinner>
+                    </div>
+                    <div id="custom-spectrogram-container" class="mx-auto"></div>
+                    <h3>Audio tracks</h3>
+                    <div class="myLoader">
+                        <app-loading-spinner></app-loading-spinner>
+                    </div>
+                    <div id="custom-audio-tracks-container" class="mx-auto"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success"
+                            (click)="closePopup()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

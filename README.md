@@ -29,4 +29,5 @@ A simple Spring/Angular project presenting the audio super-resolution B.S. thesi
 - [Be Functional With Java — get rid of if/else null checks with Vavr’s Option](https://blog.softwaremill.com/be-functional-with-java-get-rid-of-if-else-null-checks-with-vavrs-option-c3d3de7a5c1d)
 - [Spring Boot/Angular JWT Authentication](https://www.javainuse.com/spring/boot-jwt)
 - [Spring Boot/Angular + Database JWT Authentication](https://www.javainuse.com/spring/boot-jwt-mysql)
+- [RestTemplate vs. WebClient](https://www.baeldung.com/spring-webclient-resttemplate)
 
