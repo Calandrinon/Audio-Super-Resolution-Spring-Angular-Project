@@ -7,6 +7,12 @@ A simple Spring/Angular project presenting the audio super-resolution B.S. thesi
 
 ![Dashboard](audio-super-res/dashboard.png)
 
+### Retrieving generated outputs
+
+![Loading predictions](audio-super-res/loading-predictions.png)
+
+![Loaded predictions](audio-super-res/loaded-predictions.png)
+
 ### Login page
 
 ![Login](audio-super-res/login-page.png)
@@ -14,14 +20,6 @@ A simple Spring/Angular project presenting the audio super-resolution B.S. thesi
 ### Register page
 
 ![Register](audio-super-res/register-page.png)
-
-
-## Basic UML diagrams of the classes currently created
-
-![Authentication UML](audio-super-res/authenticationuml.png)
-
-![Prediction UML](audio-super-res/predictionuml.png)
-
 
 ## Resources
 - [How to install and setup PostgreSQL on Ubuntu 20.04](https://www.cherryservers.com/blog/how-to-install-and-setup-postgresql-server-on-ubuntu-20-04)
