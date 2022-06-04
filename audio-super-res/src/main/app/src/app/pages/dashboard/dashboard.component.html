@@ -81,4 +81,71 @@
       </div>
     </div>
   </div>
+
+  <div class="row mt-5">
+    <div class="col-xl-4">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Root mean squared error</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            The root mean squared error is a commonly used measure in the evaluation of the quality of a model's predictions. Technically, the RMSE describes how far a prediction ends up from the actual expected value by using the Euclidian distance.
+
+            Similar to the classic mean squared error, in order to calculate the RMSE, we have to compute all residual errors for each data point (in our case, the difference between the samples from the high-resolution audio and the ones from the super-resolution audio, which is the output of the model). These differences are then raised to the power of 2, summed up, then their mean is computed and the square root of this number is determined.
+
+            <div [mathjax]="rmseFormula"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Normalized root mean squared error</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            As a general rule, the root mean squared error is a decent measure of accuracy, however it should only be used to compare prediction errors for different models on a particular dataset and not between datasets, due to the fact that it is a scale-dependent metric. In order to solve this specific issue, we can involve the normalized root mean squared error which is based on the RMSE, coupled with a method of normalizing this value to get rid of RMSE's property of being scale-dependent. In our case, the RMSE is normalized by the interquartile range of the set that is computed on, regardless of whether it is the training set, validation set or test set.
+
+            <div [mathjax]="nrmseFormula"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Signal-to-noise ratio</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            The signal-to-noise ratio (SNR) is a metric regularly used in acoustics in experiments focused on measurements and instrument design. SNR creates a comparison between the level of a signal and the level of the background noise contained inside it.
+
+            The general formula for this metric is written below:
+            <div [mathjax]="snrFormula" class="display: inline;"></div>
+
+            Due to the fact that many signals contain values which are situated in wide ranges, they are frequently expressed through the logarithmic decibel scale.
+
+            <div [mathjax]="snrFormula2"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

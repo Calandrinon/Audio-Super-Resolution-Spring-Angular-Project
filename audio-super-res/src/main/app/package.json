@@ -31,6 +31,7 @@
     "core-js": "3.21.1",
     "jszip": "^3.9.1",
     "jszip-utils": "^0.1.0",
+    "mathjax-angular": "^1.4.2",
     "ngx-clipboard": "15.0.1",
     "ngx-toastr": "14.2.2",
     "nouislider": "15.5.1",
