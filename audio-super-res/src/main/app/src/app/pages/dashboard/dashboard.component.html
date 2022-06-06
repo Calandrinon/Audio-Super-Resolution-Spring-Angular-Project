@@ -171,7 +171,7 @@
     </div>
   </div>
   <div class="row mt-5">
-    <div class="col-xl-12">
+    <div class="col-xl-8 mb-5 mb-xl-0">
       <div class="card shadow">
         <div class="card-header border-0">
           <div class="row align-items-center">
@@ -180,9 +180,10 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <p>According to the displayed <a href="http://www.wireless-nets.com/resources/tutorials/define_SNR_values.html">link</a>, the acceptable signal-to-noise ratio for wireless voice telephony systems recommended by Cisco is a value of 25 dB. In our case, the model's evaluation metrics surpassed the recommended SNR. </p>
-          <table>
+        <div class="card-body d-flex">
+          <div class="chart">
+            <p>According to the displayed <a href="http://www.wireless-nets.com/resources/tutorials/define_SNR_values.html">link</a>, the acceptable signal-to-noise ratio for wireless voice telephony systems recommended by Cisco is a value of 25 dB. In our case, the model's evaluation metrics surpassed the recommended SNR. This suggests that increasing the complexity of the model by including 1D Inception modules and removing the last dropout layer, we do indeed obtain a slightly improved performance. </p>
+            <table>
               <br>
               <colgroup span="3"></colgroup>
               <colgroup span="3"></colgroup>
@@ -276,6 +277,74 @@
               </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">SNR levels</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <table>
+              <tr>
+                <td>> 40dB SNR</td>
+                <td>Excellent signal</td>
+              </tr>
+
+              <tr>
+                <td class="redth">25dB to 40dB SNR</td>
+                <td class="redth">Very good signal</td>
+              </tr>
+
+              <tr>
+                <td>15dB to 25dB SNR</td>
+                <td>Low signal</td>
+              </tr>
+
+              <tr>
+                <td>10dB to 15dB SNR</td>
+                <td>Very low signal</td>
+              </tr>
+
+              <tr>
+                <td>5dB to 10dB SNR</td>
+                <td>No signal</td>
+              </tr>
+            </table>
+
+            <h3 class="mb-0" style="margin-top: 20px;">Baselines (SNR values)</h3>
+
+            <table>
+              <br>
+              <thead>
+              <tr>
+                <th>Linear interpolation</th>
+                <th>Cubic spline interpolation</th>
+                <th class="redth">5-layer model with Inception blocks containing no dropout</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  19.67
+                </td>
+                <td>
+                  26.80
+                </td>
+                <td class="redth">
+                  27.57
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
