@@ -36,7 +36,7 @@
         </div>
         <div class="card-body">
           <div class="chart">
-            <p>In digital signal processing, upsampling, expansion, and interpolation are terms associated with the process of resampling in a multi-rate digital signal processing system. Upsampling can be synonymous with expansion, or it can describe an entire process of expansion and filtering (interpolation). When upsampling is performed on a sequence of samples of a signal or other continuous function, it produces an approximation of the sequence that would have been obtained by sampling the signal at a higher rate (or density, as in the case of a photograph). For example, if compact disc audio at 44,100 samples/second is upsampled by a factor of 5/4, the resulting sample-rate is 55,125. </p>
+            <p>In digital signal processing, upsampling, expansion, and interpolation are terms associated with the process of resampling in a multi-rate digital signal processing system. Upsampling can be synonymous with expansion, or it can describe an entire process of expansion and filtering (interpolation). When upsampling is performed on a sequence of samples of a signal or other continuous function, it produces an approximation of the sequence that would have been obtained by sampling the signal at a higher rate. </p>
           </div>
         </div>
       </div>
@@ -94,9 +94,7 @@
         </div>
         <div class="card-body">
           <div class="chart">
-            The root mean squared error is a commonly used measure in the evaluation of the quality of a model's predictions. Technically, the RMSE describes how far a prediction ends up from the actual expected value by using the Euclidian distance.
-
-            Similar to the classic mean squared error, in order to calculate the RMSE, we have to compute all residual errors for each data point (in our case, the difference between the samples from the high-resolution audio and the ones from the super-resolution audio, which is the output of the model). These differences are then raised to the power of 2, summed up, then their mean is computed and the square root of this number is determined.
+            The root mean squared error is a commonly used measure in the evaluation of the quality of a model's predictions, describing how far a prediction ends up from the actual expected value by using the Euclidian distance.
 
             <div [mathjax]="rmseFormula"></div>
           </div>
@@ -115,7 +113,7 @@
         </div>
         <div class="card-body">
           <div class="chart">
-            As a general rule, the root mean squared error is a decent measure of accuracy, however it should only be used to compare prediction errors for different models on a particular dataset and not between datasets, due to the fact that it is a scale-dependent metric. In order to solve this specific issue, we can involve the normalized root mean squared error which is based on the RMSE, coupled with a method of normalizing this value to get rid of RMSE's property of being scale-dependent. In our case, the RMSE is normalized by the interquartile range of the set that is computed on, regardless of whether it is the training set, validation set or test set.
+            To solve the issue of RMSE being a scale-dependent metric, we can use the normalized root mean squared error which is based on the RMSE, coupled with a method of normalizing this value. In our case, the RMSE is normalized by the interquartile range of the set that is computed on, regardless of whether it is the training set, validation set or test set.
 
             <div [mathjax]="nrmseFormula"></div>
           </div>
@@ -134,9 +132,8 @@
         </div>
         <div class="card-body">
           <div class="chart">
-            The signal-to-noise ratio (SNR) is a metric regularly used in acoustics in experiments focused on measurements and instrument design. SNR creates a comparison between the level of a signal and the level of the background noise contained inside it.
+            SNR is a commonly used metric in acoustics and engineering as a whole. It creates a comparison between the level of a signal and the level of the background noise contained inside it.
 
-            The general formula for this metric is written below:
             <div [mathjax]="snrFormula" class="display: inline;"></div>
 
             Due to the fact that many signals contain values which are situated in wide ranges, they are frequently expressed through the logarithmic decibel scale.
@@ -159,7 +156,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body d-flex">
+        <div class="card-body">
           <p> The dataset involved in the model development is the Voice Bank Corpus (also known as VCTK Corpus), which contains speech recordings featuring 110 English speakers reading various phrases from the Herald Glasgow newspapers. The recordings are accompanied by their corresponding transcript text and each speaker is associated with a specific collection of texts that were selected based on a greedy approach in order to obtain a sufficient range of phonemes.
           The recordings have been created by means of a setup formed out of an omni-directional microphone as well as a diaphragm condenser microphone at a sampling rate 96khZ and a sample-depth of 24 bits. Afterwards, the recordings were downsampled to 48 khZ, which is also the sample rate found in our experiment, and to a sample-depth of 16 bits, suggesting that the values contained in the audio are included in the range ±2<sup>16</sup>.
           </p>
@@ -180,105 +177,10 @@
             </div>
           </div>
         </div>
-        <div class="card-body d-flex">
-          <div class="chart">
-            <p>According to the displayed <a href="http://www.wireless-nets.com/resources/tutorials/define_SNR_values.html">link</a>, the acceptable signal-to-noise ratio for wireless voice telephony systems recommended by Cisco is a value of 25 dB. In our case, the model's evaluation metrics surpassed the recommended SNR. This suggests that increasing the complexity of the model by including 1D Inception modules and removing the last dropout layer, we do indeed obtain a slightly improved performance. </p>
-            <table>
-              <br>
-              <colgroup span="3"></colgroup>
-              <colgroup span="3"></colgroup>
-              <colgroup span="3"></colgroup>
-              <thead>
-              <tr>
-                <th style="border: none;"></th>
-                <th colspan="3" scope="colgroup">3-blocks model</th>
-                <th colspan="3" scope="colgroup">4-blocks model</th>
-                <th colspan="3" scope="colgroup">5-blocks model</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td style="border: none;"></td>
-                <td>
-                  MSE
-                </td>
-                <td>
-                  SNR
-                </td>
-                <td>
-                  NRMSE
-                </td>
-                <td>
-                  MSE
-                </td>
-                <td>
-                  SNR
-                </td>
-                <td>
-                  NRMSE
-                </td>
-                <td>
-                  MSE
-                </td>
-                <td>
-                  SNR
-                </td>
-                <td>
-                  NRMSE
-                </td>
-              </tr>
-              <tr>
-                <td>upsampling blocks with dropout</td>
-                <td>67026</td>
-                <td>22.78</td>
-                <td>0.1779</td>
-                <td>66944</td>
-                <td>22.92</td>
-                <td>0.1737</td>
-                <td>64744</td>
-                <td>23.07</td>
-                <td>0.1689</td>
-              </tr>
-              <tr>
-                <td>upsampling blocks without dropout</td>
-                <td>51023</td>
-                <td>25.43</td>
-                <td>0.1162</td>
-                <td>47582</td>
-                <td>25.74</td>
-                <td>0.1125</td>
-                <td>45324</td>
-                <td>25.73</td>
-                <td>0.1125</td>
-              </tr>
-              <tr>
-                <td>with Inception modules, with dropout</td>
-                <td>170675</td>
-                <td>15.23</td>
-                <td>0.4275</td>
-                <td>81340</td>
-                <td>19.79</td>
-                <td>0.2289</td>
-                <td>75183</td>
-                <td>20.27</td>
-                <td>0.2341</td>
-              </tr>
-              <tr>
-                <td>with Inception modules, without dropout</td>
-                <td>49434</td>
-                <td>25.64</td>
-                <td>0.1143</td>
-                <td>55401</td>
-                <td>25.41</td>
-                <td>0.1194</td>
-                <td class="redth">42914</td>
-                <td class="redth">25.87</td>
-                <td class="redth">0.1116</td>
-              </tr>
-              </tbody>
-            </table>
+        <div class="card-body">
+            <p>According to the displayed <a href="http://www.wireless-nets.com/resources/tutorials/define_SNR_values.html">link</a>, the acceptable signal-to-noise ratio for wireless voice telephony systems recommended by Cisco is a value of 25 dB. In our case, the model's evaluation metrics surpassed the recommended SNR. This suggests that after increasing the complexity of the model by including 1D Inception modules and removing the last dropout layer, we do indeed obtain a slightly improved performance. </p>
+          <app-evaluation-metrics-table></app-evaluation-metrics-table>
           </div>
-        </div>
       </div>
     </div>
     <div class="col-xl-4">
@@ -291,7 +193,6 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="chart">
             <table>
               <tr>
                 <td>> 40dB SNR</td>
@@ -327,7 +228,7 @@
               <tr>
                 <th>Linear interpolation</th>
                 <th>Cubic spline interpolation</th>
-                <th class="redth">5-layer model with Inception blocks containing no dropout</th>
+                <th class="redth">Custom model</th>
               </tr>
               </thead>
               <tbody>
@@ -344,7 +245,6 @@
               </tr>
               </tbody>
             </table>
-          </div>
         </div>
       </div>
     </div>

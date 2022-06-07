@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PredictionComponent } from './prediction/prediction.component';
 import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
 import { RecorderComponent } from './recorder/recorder.component';
+import { EvaluationMetricsTableComponent } from './evaluation-metrics-table/evaluation-metrics-table.component';
 
 @NgModule({
   imports: [
@@ -22,13 +23,15 @@ import { RecorderComponent } from './recorder/recorder.component';
     PredictionComponent,
     LoadingSpinnerComponent,
     RecorderComponent,
+    EvaluationMetricsTableComponent,
   ],
     exports: [
         FooterComponent,
         NavbarComponent,
         SidebarComponent,
         PredictionComponent,
-        RecorderComponent
+        RecorderComponent,
+        EvaluationMetricsTableComponent
     ]
 })
 export class ComponentsModule { }
